@@ -10,16 +10,18 @@ function Expenses(props) {
     const handleFilterYear = (year) => {
         setFilterData(year);
     };
-    console.log(filterData);
+    const filteredExpenses = data.filter(
+        (item) => item.date.getFullYear() == filterData
+    );
     return (
         <div className="expenses">
             <ExpensesFilter
                 selected={filterData}
                 onFilterYear={handleFilterYear}
             />
-            {data
-                .filter((item) => item.date.getFullYear() == filterData)
-                .map((item) => (
+            {filteredExpenses.length === 0 && <p>No expenses found.</p>}
+            {filteredExpenses.length > 0 &&
+                filteredExpenses.map((item) => (
                     <ExpenseItem
                         key={item.id}
                         title={item.title}
