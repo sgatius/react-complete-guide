@@ -2,6 +2,7 @@ import { useState } from "react";
 import ExpensesFilter from "../FilterExpenses/ExpensesFilter";
 import ExpenseItem from "./ExpenseItem";
 import "./Expenses.css";
+import ExpensesChart from "./ExpensesChart";
 
 function Expenses(props) {
     const { data } = props;
@@ -20,6 +21,9 @@ function Expenses(props) {
                 onFilterYear={handleFilterYear}
             />
             {filteredExpenses.length === 0 && <p>No expenses found.</p>}
+            {filteredExpenses.length > 0 && (
+                <ExpensesChart expenses={filteredExpenses} />
+            )}
             {filteredExpenses.length > 0 &&
                 filteredExpenses.map((item) => (
                     <ExpenseItem
